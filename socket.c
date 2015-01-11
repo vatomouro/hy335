@@ -1,12 +1,19 @@
 #include<sys/socket.h>
+#include<sys/types.h>
+#include<netinet/tcp.h>
+#include<arpa/inet.h>
 #include<stdlib.h>
 #include<stdio.h>
 
 #define FAILURE(msg) perror(msg);abort();
 
 int Socket(int domain, int type, int protocol){
+
   int sockfd = socket(domain,type,protocol);
   if(sockfd==-1) FAILURE("socket creation failure");
+
+  int flag=1;
+  if(setsockopt(sockfd,IPPROTO_TCP,TCP_NODELAY,&flag,sizeof(int))==-1) FAILURE("setsockopt")
   return sockfd;
 }
 

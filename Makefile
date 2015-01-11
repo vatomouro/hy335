@@ -1,5 +1,5 @@
 # Change it to your disired compiler
-CC := gcc
+CC:=gcc
 
 # The flags that will be passed to the compiler
 CFLAGS := -Wall -g
@@ -32,7 +32,7 @@ mocserver: server.c music_on_cloud.h media/mediaplayer.c media/mediaplayer.h
 
 mocclient: client.c music_on_cloud.h media/mediaplayer.c media/mediaplayer.h
 	$(MAKE) -C media mediaplayer.o
-	$(CC) $(CFLAGS) $(LDFLAGS) $(GSTREAMER_FLAGS) -o mocclient client.c media/mediaplayer.o $(GSTREAMER_LD_LIBS)
+	$(CC) $(CFLAGS) $(LDFLAGS) $(GSTREAMER_FLAGS) -o mocclient socket.c client.c media/mediaplayer.o $(GSTREAMER_LD_LIBS)
 
 clean:
 	$(MAKE) -C media $@
